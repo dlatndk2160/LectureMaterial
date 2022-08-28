@@ -159,22 +159,32 @@
                 //필터나 맵을쓰거나 컨쓰거나
                 //filter(()=>()) 필터쓸때 기본
 
+                // [3, 4, 5]               <== 방법3을 적용
+
                 //filter(vvv여기서)
                 //ctrl+shift+space 함수의 설명 볼 수 있음
-                const newarr = this.$data.arr.filter((value, index, array)=>{
-                    if(index >=2){
-                        return true;
-                    }else {
-                        return false;
-                    }
-                });
+                //const newarr = this.$data.arr.filter((value, index, array)=>{
+                //    if(index >=2){
+                //        return true;
+                //    }else {
+                //        return false;
+                //    }
+                //});
+                const newarr = this.$data.arr.filter((value, index, array)=>( (index >=2) ? true :false ));
                 //        this.$data.arr = newarr;
                 //        this.$data['arr'] = newarr;
                 //                  두번째 인자는 문자열!, 숫자는 자동으로 문자열로 바꿔줌
-                this.$set(this.$data, 'arr', newarr)
+                this.$set(this.$data, 'arr', newarr);
             },
             change4(){
                 console.log(event.target);
+                // [500, 3, 4, 5, 70]      <== 방법4을 적용
+                const newarr = [500, ...this.$data.arr, 70];
+                //this.$data.arr = newarr;
+                //this.$set( , =앞의것, );//인자3개!!
+                //        this.$data.arr = newarr;
+                this.$set( this.$data, 'arr', newarr);
+
             },
 
         },
