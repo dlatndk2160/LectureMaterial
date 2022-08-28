@@ -45,15 +45,11 @@
             "추가" 버튼을 클릭하면 Object Array에 추가하고
             input 태그에 입력된 값을 지우시오.
     </xmp>
-    <hr>
+    <hr><hr><hr><hr><hr>
+
+    <hr><hr><hr><hr><hr>
 
     <div id="app" class="col-md-10 offset-md-1">
-
-        <button v-on:click='btnAddClick'>추가</button>
-        <label for="">이름</label><input v-model:value="name">
-        <label for="">전화번호</label><input v-model:value="tel">
-        <label for="">주소</label><input v-model:value="address">
-
         <table id="list" class="table-bordered">
             <thead>
                 <tr class="bg-warning text-white text-center">
@@ -64,6 +60,13 @@
                 </tr>
             </thead>
             <tbody id="contacts">
+                <!--
+                    v로 시작하는 걸 찾아야함
+                    변수
+                    contacts:[
+                        {name, tel, address}
+                    ]
+                -->
                 <tr v-for="(contact, i) in contacts" v-bind:key="i">
                     <td>{{i+1}}</td>
                     <td>{{contact.name}}</td>
@@ -72,6 +75,17 @@
                 </tr>
             </tbody>
         </table>
+
+        <button v-on:click='btnAddClick'>추가</button>
+
+        <!-- 3번 하고나서 시작-->
+        <!--
+        <button v-on:click='btnAddClick'>추가</button>
+        -->
+        <label for="">이름</label><input v-model:value="name">
+        <label for="">전화번호</label><input v-model:value="tel">
+        <label for="">주소</label><input v-model:value="address">
+        <!-- 3번 하고나서 마침-->
     </div>
 </body>
 
@@ -89,18 +103,48 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"> /* axios 플러그인 임포트 */</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> /* jQuery 플러그인 임포트 */</script>
 <script>
+    //선생님이랑
     new Vue({
         /* edtmc^2w */
         el: '#app',
         data: {
             /* 인스턴스 안에서 사용되는 변수 등록, 공유 변수 */
+            contacts:[
+                //{name, tel, address},
+                //{name:'aa', tel:'bb', address:'cc'},
+                {name:'설현',tel:'010-3456-8200', address:'서현g'},
+                {name:'혜리',tel:'010-3456-8299', address:'서리g'},
+            ]
+
+        },
+        //template: ``,
+        methods: {
+            /* 이벤트 핸들러 등록 + 일반 함수 */
+
+        },
+    });
+
+
+    //내가
+    new Vue({
+        /* edtmc^2w */
+        el: '#app',
+        data: {
+            /* 인스턴스 안에서 사용되는 변수 등록, 공유 변수 */
+            contacts:[
+                {name:'설현',tel:'010-3456-8200', address:'서현'},
+                {name:'혜리',tel:'010-3456-8299', address:'서리'},
+                {name:'Three',tel:'C', address:'cccc'},
+            ],
 
         },
         //template: ``,
         methods: {
             /* 이벤트 핸들러 등록 + 일반 함수 */
             btnAddClick(){
-                
+                //console.log('test');
+                //this.$data.contacts[contacts.length]="{a, b, c}";
+
             }
 
         },
