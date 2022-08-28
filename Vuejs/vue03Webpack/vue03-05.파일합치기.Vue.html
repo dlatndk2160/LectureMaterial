@@ -31,6 +31,9 @@
 
             $ npm install @vue/cli -g
 
+            #!!!!! vue.cli를 전역(--global)으로 설치한다 (bash: vue: command not found)뜨면
+            $npm install --global @vue/cli
+
             $ vue -V
             @vue/cli 5.0.1
 
@@ -39,13 +42,13 @@
             Vue CLI
             ? Please pick a preset: (Use arrow keys)
             > Default ([Vue 2] babel, eslint)
-              Default (Vue 3) ([Vue 3] babel, eslint)
+              Default (Vue 3) ([Vue 3] babel, eslint) #!!!! 3번 설치 화살표로 이동시켜서 엔터하면 설치됨
               Manually select features
 
               ... 중략
 
-              $ cd webpackprj
-              $ npm run serve
+              $ cd webpackprj #파일경로바뀜
+              $ npm run serve #서버실행
 
             $ ls    # 현재 폴더 파일 목록 출력
             App.vue  fileload.png  footer.html  Footer.vue  header.html  Header.vue
@@ -63,6 +66,7 @@
 
       step 4. Vue 프로젝트 실행
             $ npm run serve
+            #network 열어보기 ctrl+클릭
 
       step 5. 실습 파일 복사
             반드시 윈도우 탐색기에서 Header.vue, Footer.vue, App.vue 파일을
@@ -70,9 +74,9 @@
             visual studio code 에서 붙여넣기 하면 안됨.
 
       step 6. 터미널에서 실행중인 프로세스 종료
-            "ctrl + c"  누르면 프로세스 종료 됨
+            "ctrl + c"  누르면 프로세스 종료 됨 # !!!!
 
-      step 7. 운영 서버에 배포할 파일을 만든다. <== 웹팩 사용
+      step 7. 운영 서버에 배포할 파일을 만든다ㅣ. <== 웹팩 사용
             $ ls       # dist 폴더가 있는지 확인
             babel.config.js  node_modules/  package.json  package-lock.json  public/  README.md  src/
 
