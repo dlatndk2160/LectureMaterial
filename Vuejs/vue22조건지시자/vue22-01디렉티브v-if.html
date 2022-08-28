@@ -87,6 +87,28 @@
     <h2>v-if/v-else-if/v-else 연습 4 : 실습</h2>
     <div id="app4">
         <button v-on:click="clickBind">클릭</button>
+
+        <!--
+            if 문 type === 1
+
+            변수: type
+            함수: clickBind
+
+            if(type === 1){
+                type = 2;
+
+            }else if(type === 2){
+                type = 3;
+
+            }else if(type === 3){
+                type = 0;
+
+            }else{
+                type = 1;
+
+            }
+
+        -->
         <span v-if="type === 1">
             A
         </span>
@@ -149,13 +171,21 @@
 
             clickBind(){
                 //if(awesome === false){    //아래처럼 경로를 다 적어줘야함 //나의.데이터안의.변수명
+
+                /*
                 if( this.$data.awesome === false){
                     //this.$data.awesome = true;
+                    //this.$set(,,);
+                    this.$set( this.$data,'awesome',true);
 
                 }else {
                     //this.$data.awesome = false;
+                    this.$set( this.$data,'awesome',false);
 
                 }
+                */
+               //위의 if else 문을 아래 한줄로 바꿀 수 있음
+               this.$set(this.$data,'awesome', !this.$data.awesome);
             }
 
         },
@@ -179,6 +209,45 @@
             console.log("updated");
         },
     });
+
+    new Vue({
+        /* edtmc^2w */
+        el: '#app4',
+        data: {
+            /* 인스턴스 안에서 사용되는 변수 등록, 공유 변수 */
+            type: 0,
+
+        },
+        //template: ``,
+        methods: {
+            /* 이벤트 핸들러 등록 + 일반 함수 */
+
+            //실습해보면서 연관성을 확인하기
+            //해당칸에 있는 정보를 보여주는건가???>
+            clickBind(){
+
+                /*
+                if(this.$data.type === 1){
+                    this.$data.type = 2;
+
+                }else if(this.$data.type === 2){
+                    this.$data.type = 3;
+
+                }else if(this.$data.type === 3){
+                    this.$data.type = 0;
+
+                }else{
+                    this.$data.type = 1;
+
+                }
+                */
+               this.$data.type = (this.$data.type + 1) % 4;
+
+            }
+
+        },
+    });
+
 
 
 

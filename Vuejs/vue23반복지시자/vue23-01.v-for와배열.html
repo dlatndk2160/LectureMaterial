@@ -54,7 +54,7 @@
             <option value="C"> Three </option>
         </select>
 
-        [참조]page 104
+        [참조]page 104? 105?
     </xmp>
     <hr>
 
@@ -65,6 +65,17 @@
                 <!--
                     v-for는 javascript의 for ~ in 문과 같은 것이다
                     javascript for( var system in systems); 문과 같다
+                -->
+
+                <!--
+                    v-for인경우는 in 다음에 오는 것만 변수로 만든다
+                    system 배열로
+                    systems : []
+                    변수만 신경쓰고 in 앞의 것은 무시~~
+
+                    system[]
+                    app[]
+                    변수2개
                 -->
                 <li v-for="system in systems">
                     {{ system }}
@@ -105,3 +116,44 @@
 </html>
 
 <!-- vue 플러그인 임포트   -->
+
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.7.8/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script src="https://unpkg.com/vuex@3.6.2/dist/vuex.js"> /* vuex 플러그인 임포트 */</script>
+<script src="https://unpkg.com/vue-router@3.5.4/dist/vue-router.js"> /* vue 라우터 플러그인 임포트 */</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"> /* axios 플러그인 임포트 */</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> /* jQuery 플러그인 임포트 */</script>
+<script>
+    new Vue({
+        /* edtmc^2w */
+        el: '#app',
+        data: {
+            /* 인스턴스 안에서 사용되는 변수 등록, 공유 변수 */
+
+            systems:['android', 'ios', 'windows'],
+            arr:[1,2,3,4],
+
+        },
+    });
+
+    new Vue({
+        /* edtmc^2w */
+        el: '#app1',
+        data: {
+            /* 인스턴스 안에서 사용되는 변수 등록, 공유 변수 */
+            options:[
+                {text:'One',value:'A'},
+                {text:'Two',value:'B'},
+                {text:'Three',value:'C'},
+            ],
+
+        },
+        //template: ``,
+        methods: {
+            /* 이벤트 핸들러 등록 + 일반 함수 */
+
+        },
+    });
+
+
+</script>
