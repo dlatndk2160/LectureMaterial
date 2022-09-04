@@ -45,7 +45,17 @@
 
     주요 학습 사항
     1. vue 지시자 작성을 연습한다.
+
+        !!
+        v-bind, v-on, v-for
+        !!
     2. 이벤트 취소를 연습한다.
+
+        !!
+        많이 사용됨
+        event.stopPropagation();
+        event.prevenDefault();
+        !!
 
     문제1.
     a 를 클릭하면 href 에 있는 값을 "img2"영역 에 나오게 하시오
@@ -194,8 +204,17 @@
             이미지 위에 마우스를 내리면(mouseout ) ==> ../images/but1.gif , ../images/img_swap_off.png
             이미지 위에 마우스를 올리면(mouseover) ==> ../images/but2.gif , ../images/img_swap_on.png
         </xmp>
-        <img src="img_but1" id="but1"     mouseover="imageover" mouseout="imageout" />
-        <img src="img_swap" id="img-swap" mouseover="imageover" mouseout="imageout" />
+        <img v-bind:src="img_but1" id="but1"     v-on:mouseover="imageover" v-on:mouseout="imageout" />
+        <img v-bind:src="img_swap" id="img-swap" v-on:mouseover="imageover" v-on:mouseout="imageout" />
+
+        !!
+        상태(데이터, 변수)
+        img_but1img_swap
+
+        함수(이벤트핸들러)
+        imageover
+        imageout
+        !!
         <hr />
 
         <xmp>
@@ -203,21 +222,30 @@
             span에 mousedown 이벤트 핸들러를 추가하시오. ==> 이벤트 핸들러명 spanmousedown. background-color 를 blue 로 설정
             span에 mouseup 이벤트 핸들러를 추가하시오.   ==> 이벤트 핸들러명 spanmouseup.   background-color 를 pink 로 설정
             span에 mouseout 이벤트 핸들러를 추가하시오.  ==> 이벤트 핸들러명 spanmouseout.  background-color 를 red 로 설정
+
+            !!
+            css 표기법을 js 표기법으로 바꾸는 방법을 배운다.
+            <span style="background-color:yellow"></span>
+            1. 다시 대신에 대문자   background-color ===> backgroundColor
+            2. 문자열              yellow           ===> "yellow"
+            3. 세미콜론 대신 콤마   ;                ===> ,
+
+
         </xmp>
-        <span mouseover= "spanmouseover"
-              mousedown= "spanmousedown"
-              mouseup  = "spanmouseup"
-              mouseout = "spanmouseout" >
+        <span v-on:mouseover= "spanmouseover"
+              v-on:mousedown= "spanmousedown"
+              v-on:mouseup  = "spanmouseup"
+              v-on:mouseout = "spanmouseout" >
         </span>
-        <span mouseover= "spanmouseover"
-              mousedown= "spanmousedown"
-              mouseup  = "spanmouseup"
-              mouseout = "spanmouseout" >
+        <span v-on:mouseover= "spanmouseover"
+              v-on:mousedown= "spanmousedown"
+              v-on:mouseup  = "spanmouseup"
+              v-on:mouseout = "spanmouseout" >
         </span>
-        <span mouseover= "spanmouseover"
-              mousedown= "spanmousedown"
-              mouseup  = "spanmouseup"
-              mouseout = "spanmouseout">
+        <span v-on:mouseover= "spanmouseover"
+              v-on:mousedown= "spanmousedown"
+              v-on:mouseup  = "spanmouseup"
+              v-on:mouseout = "spanmouseout">
         </span>
         <hr />
 
@@ -228,14 +256,52 @@
             도전: 기능추가
             "vue23-01.v-for와배열.html" 를 참조하여 option 부분을 v-for 를 사용하도록 수정하시오.
 
+            !!
+            1.지시자 작성
+                v-on
+                v-bind
+
+            2.변수, 함수처리
+                변수: img_select:'../images/apple.gif' //v-bind
+                함수: selectchange  //v-on
+
+            3.v-for 기능 추가
+
+            option : [  //옵션은 배열이어야하고
+                {text, value}, //객체여야한다
+                {text, value},
+                {text, value},
+
+
+                {text:'딸기', value:'../images/strawberry.gif'},
+                {text:'바나나', value:'../images/banana.gif'},
+                {text:'사과', value:'../images/apple.gif'},
+            ]
+
+            속성을 변수처럼 사용하고 싶을때는 v-bind를 사용하면 된다
+
+            초기값 설정하고 싶을때
+            select의 경우 => v-model:selected="img_select"
+            img의 경우 => v-bind:src="img_select"
+
+            아래 select option이 바뀌면 img_select도 바뀜
+
+
         </xmp>
-        <select id="sel" change="selectchange">
+        <select id="sel" v-on:change="selectchange" v-model:selected="img_select">
+            <option v-for="(option, index) in options"
+                    v-bind:key = "index"
+                    v-bind:value="option.value">
+                    {{option.text}}
+            </option>
+            <!--
             <option value="../images/strawberry.gif">딸기</option>
             <option value="../images/banana.gif">바나나</option>
             <option value="../images/apple.gif" selected>사과</option>
+            -->
         </select>
 
-        <img id="img" src="img_select" />
+        <img id="img" v-bind:src="img_select" />
         <hr />
 
         <xmp>
@@ -274,6 +340,19 @@
 
             img_image3: null,
 
+            img_but1: '../images/but1.gif',
+            img_swap: '../images/img_swap_off.png',
+
+            //기본값 설정해줌
+            img_select: '../images/apple.gif',
+
+
+            options:[
+                {text:'딸기', value:'../images/strawberry.gif'},
+                {text:'바나나', value:'../images/banana.gif'},
+                {text:'사과', value:'../images/apple.gif'},
+            ],
+
 
         },
         //template: ``,
@@ -283,7 +362,7 @@
                 console.log(event.target);
                 //debugger;
                 //event.target === a태그
-                //a태그의 htef의 속성값을 알수 있s는 방법은?
+                //a태그의 htef의 속성값을 알수 있는 방법은?
                 const href = event.target.href;
 
                 //이미지 창 뜸
@@ -291,14 +370,96 @@
                 //debugger;
 
                 //a태그의 페이지 이동 기능을 중지
-                
+
                 //이벤트 중지할때 2개를 한번에 쓰기
                 //이미지가 해당페이지에서 보여짐
                 event.preventDefault();
 
                 //이벤트 취소
                 event.stopPropagation();
-            }
+            },
+
+            imageover(e){
+                console.log(e.target);
+
+                //이미지 위에 마우스를 올리면(마우스오버)
+                //==>../images/but2.gif, ../images/img_swap_on.png
+
+                this.$data.img_but1 = '../images/but2.gif';
+                this.$data.img_swap = '../images/img_swap_on.png';
+            },
+            imageout(e){
+                console.log(e.target);
+
+                //이미지 위에 마우스를 내리면(마우스아웃)
+                //==>../images/but1.gif, ../images/img_swap_off.png
+
+                //this.$data.img_but1 = '../images/but1.gif';
+                //this.$data.img_swap = '../images/img_swap_off.png';
+
+                if(e.target.id === 'but1')
+                    this.$data.img_but1 = '../images/but1.gif';
+                else
+                    this.$data.img_swap = '../images/img_swap_off.png';
+
+            },
+
+            //event 대신 e를 넣어줌으로써 e로사용하게 됨
+
+
+            //span에 mouseover 이벤트 핸들러를 추가하시오. ==> 이벤트 핸들러명 spanmouseover. background-color 를 yellow 로 설정
+            //span에 mousedown 이벤트 핸들러를 추가하시오. ==> 이벤트 핸들러명 spanmousedown. background-color 를 blue 로 설정
+            //span에 mouseup 이벤트 핸들러를 추가하시오.   ==> 이벤트 핸들러명 spanmouseup.   background-color 를 pink 로 설정
+            //span에 mouseout 이벤트 핸들러를 추가하시오.  ==> 이벤트 핸들러명 spanmouseout.  background-color 를 red 로 설정
+            spanmouseover(e){
+                console.log(e.target);
+                //background-color 를 yellow 로 설정
+
+                // style="background=color:yellow;"를 아래와 같이 변경
+                e.target.style.backgroundColor="yellow";
+            },
+
+            spanmousedown(e){
+                console.log(e.target);
+                //background-color 를 blue 로 설정
+
+                // style="background=color:blue;"를 아래와 같이 변경
+                e.target.style.backgroundColor="blue";
+            },
+            spanmouseup(e){
+                console.log(e.target);
+                //background-color 를 pink 로 설정
+
+                // style="background=color:pink;"를 아래와 같이 변경
+                e.target.style.backgroundColor="pink";
+            },
+            spanmouseout(e){
+                console.log(e.target);
+                //background-color 를 red 로 설정
+
+                // style="background=color:red;"를 아래와 같이 변경
+                e.target.style.backgroundColor="red";
+            },
+
+
+            selectchange(e){
+                console.log(e.target);  //select
+                console.log(e.target.value);  //option value=""
+
+                //나의 데이타에 있는 변수에 select option value를 넣는다
+                this.$data.img_select = e.target.value;
+            },
+
+
+
+
+
+
+
+
+
+
+
 
         },
         components: {
