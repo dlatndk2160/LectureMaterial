@@ -1,42 +1,25 @@
 <template>
     <div id="app">
-        <p>
-            <button v-on:click="clickAddBox">박스 추가</button>
-        </p>
-        <p>
-            <b v-for="(val, i) in arr" v-bind:key="i">
-                <!--
-                {{ val }}
-                -->
-                <component-box v-bind:num="val"></component-box>
-            </b>
-        </p>
+        자식 컴포넌트에서 받은 값: {{ mesg }}
+        <child-component v-on:show-log="printText"></child-component>
     </div>
 </template>
 
 <script>
-import Vue3104Counter from '../components/View3104Counter.vue';
 export default {
     /* pdtmc^2w */
     props: [],
     data() {
         /* 컴포넌트 안에서 사용되는 변수 등록. 개별 변수 */
-        return {
-            arr: [1, 2, 3, 4, 5]
-        };
+        return {};
     },
     //template: ``,
     methods: {
         /* 이벤트 핸들러 등록 + 일반 함수 */
-        clickAddBox() {
-            this.$data.arr.push(this.$data.arr.length + 1);
-        }
     },
     components: {
         /* 전역 컴포넌트는 등록하지 않는다. */
         /* 지역 컴포넌트나 파일 컴포넌트이면 등록해야 한다 . 예시) "태그명" : 컴포넌트명 */
-
-        'component-box': Vue3104Counter
     },
     computed: {
         /* 자동처리 + 동기식. 메서드로 작성. return 필수. data 와 공존 불가 */

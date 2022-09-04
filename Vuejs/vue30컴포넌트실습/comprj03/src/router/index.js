@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import Vue3103View from '../views/Vue3103View.vue';
 import Vue3104View from '../views/Vue3104View.vue';
+import Vue31exView from '../views/Vue31exView.vue';
+import Vue3403View from '../views/Vue3403View.vue';
 
 Vue.use(VueRouter);
 
@@ -27,9 +29,20 @@ const routes = [
         component: Vue3103View
     },
     {
-        /* url 과 컴포넌트 연결 */ path: '/vue3104',
+        /* url 과 컴포넌트 연결 */
+        path: '/vue3104',
         name: 'vue3104',
         component: Vue3104View
+    },
+    {
+        path: '/vue31ex',
+        name: 'vue31ex',
+        component: Vue31exView
+    },
+    {
+        path: '/vue3403',
+        name: 'vue3403',
+        component: Vue3403View
     }
 ];
 

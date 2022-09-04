@@ -1,42 +1,63 @@
+<style scoped>
+/* <div id="content-list"> */
+#content {
+    background-color: white;
+    margin: 0 0 30px 0;
+}
+
+aside {
+    background-color: gray;
+    margin: 20px;
+    width: calc(50% - 40px);
+    height: 200px;
+    float: left;
+}
+
+#content-list {
+    background-color: gray;
+    margin: 20px;
+    width: calc(50% - 40px);
+    float: right;
+    height: 200px;
+}
+
+#content::after {
+    clear: both;
+    display: block;
+    content: '';
+}
+</style>
 <template>
-    <div id="app">
-        <p>
-            <button v-on:click="clickAddBox">박스 추가</button>
-        </p>
-        <p>
-            <b v-for="(val, i) in arr" v-bind:key="i">
-                <!--
-                {{ val }}
-                -->
-                <component-box v-bind:num="val"></component-box>
-            </b>
-        </p>
+    <div id="content">
+        <p>Content</p>
+
+        <!-- component-aside -->
+        <Vue31exAside></Vue31exAside>
+
+        <!-- component-content-list -->
+        <Vue31exList></Vue31exList>
     </div>
 </template>
 
 <script>
-import Vue3104Counter from '../components/View3104Counter.vue';
+import Vue31exAside from '../components/Vue31exAside.vue';
+import Vue31exList from '../components/Vue31exList.vue';
 export default {
     /* pdtmc^2w */
     props: [],
     data() {
         /* 컴포넌트 안에서 사용되는 변수 등록. 개별 변수 */
-        return {
-            arr: [1, 2, 3, 4, 5]
-        };
+        return {};
     },
     //template: ``,
     methods: {
         /* 이벤트 핸들러 등록 + 일반 함수 */
-        clickAddBox() {
-            this.$data.arr.push(this.$data.arr.length + 1);
-        }
     },
     components: {
         /* 전역 컴포넌트는 등록하지 않는다. */
         /* 지역 컴포넌트나 파일 컴포넌트이면 등록해야 한다 . 예시) "태그명" : 컴포넌트명 */
-
-        'component-box': Vue3104Counter
+        Vue31exAside: Vue31exAside,
+        Vue31exList: Vue31exList
     },
     computed: {
         /* 자동처리 + 동기식. 메서드로 작성. return 필수. data 와 공존 불가 */
