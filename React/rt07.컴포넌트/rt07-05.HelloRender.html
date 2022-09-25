@@ -15,6 +15,9 @@
         함수 컴포넌트를 만드는 방법을 반복한다.
         함수 컴포넌트명 : HelloRender
         html 을 JSX로 변환 할 때의 규칙을 학습한다.
+            1. class ===> className
+            2. for   ===> htmlFor
+            3. value ===> defaultValue
         아래의 HTML 태그를 이용하여 그림처럼 출력되게 작성하시오.
 
         작성  순서
@@ -43,4 +46,86 @@
 </html>
 
 
+<script src="https://unpkg.com/@babel/standalone/babel.js"  crossorigin="anonymous">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="http://unpkg.com/react@17/umd/react.development.js" crossorigin="anonymous">
+    /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="http://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin="anonymous">
+    /* import ReactDOM from 'react-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.js" crossorigin="anonymous">
+</script>
+<script src="http://unpkg.com/react-is@17/umd/react-is.development.js"  crossorigin="anonymous">
+</script>
+<script src="http://unpkg.com/styled-components@5/dist/styled-components.js" crossorigin="anonymous">
+    /*  import styled, { css } from 'styled-components' */
+</script>
+<script type="text/babel">
 
+    const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
+
+    // 1. 컴포넌트 만들기. HelloRender
+    // 2. 컴포넌트를 화면에 붙이시오. ReactDOM.render( , );
+
+    /* const {aaa, bbb, ...props} = props */
+    function HelloRender({
+      ...props
+    }) {
+
+      // useState 를 사용한 컴포넌트의 상태값 설정
+      const [변수명, set변수명] = useState('기본값'); // 상태값이 기본타입인 경우
+
+      // ref 만들기.
+      // const refInput = useRef();
+
+      // refIsMounted는 생명주기의 마운트와 업데이트를 구분하기 위한 ref
+      const refIsMounted = useRef(false);
+      useEffect( () => {
+        if (refIsMounted.current){
+          // 업데이트 될 때마다 실행됨. 여러번. state 가 변경될 때마다
+          // console.log('rt07-05.HelloRender >> componentDidUpdate');
+        }
+        else {
+          // 마운트 완료 후에 실행됨. 한번만. focus 줄때
+          // console.log('rt07-05.HelloRender >> componentDidMount');
+          refIsMounted.current = true;
+        }
+        return () => {
+          // 언마운트 직전에 한번만 실행됨.
+          // console.log('rt07-05.HelloRender >> componentWillUmount');
+        };
+      }, [/* 조건 제어: 메서드와 연관되는 상태(변수)명들을 기술 */]);
+
+      // callback 메서드 작성. callback 메서드는 부모의 공유 상태값을 변경하기 위해서 사용된다.
+      const callback = useCallback( (param)=>{
+        // state 변경
+      }, [/* 조건 제어: 메서드와 연관되는 상태(변수)명들을 기술 */]);
+
+      // 이벤트 핸들러 작성.
+      const handler = ()=>{
+        // 이벤트 핸들러는 화살표 함수로 만든다
+        console.log(window.event.target);
+      };
+
+      // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
+      //class를 className으로 수정해줬고 img태그 닫아줌
+      //이미지 안나옴 안나오는부분 확인할것
+      return (
+        <div className="App">
+            <header className="App-header">
+                <img src="../images/logo.svg" className="App-logo" alt="logo"></img>
+
+                <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
+                    Learn React
+                </a>
+            </header>
+        </div>
+      )
+    }
+    ReactDOM.render(
+        <HelloRender name={"Hello"}></HelloRender>, document.getElementById('app')
+    )
+
+</script>
