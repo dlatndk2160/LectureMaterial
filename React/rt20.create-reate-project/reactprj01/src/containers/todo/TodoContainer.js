@@ -195,6 +195,53 @@ function TodoContainer({ ...props }) {
       todoItems,
     ],
   );
+  const callbackDoneToggle = useCallback(
+    (id) => {
+      // state 변경
+      //debugger;
+
+      // 직접 코드를 완성하시오.
+      // setTodoItems 는  todoItems 상태를 바꾸기 위한 setter 메서드
+      // todoItems = [];
+
+      const newTodos = todoItems.map((item) => {
+        if (item.id === id) {
+          item.done = !item.done;
+        }
+
+        return item;
+      });
+      setTodoItems(newTodos); //todoItems = newTodos;
+    },
+    [
+      /* 연관배열: 메서드와 연관되는 상태(변수)명들을 기술 */
+      todoItems,
+      //setTodoItems 입력시 바로위쪽에 있는것 입력시
+      //해당부분 set빼고 대문자소문자로 바꾸고 작성해줘야함
+    ],
+  );
+
+  const callbackRemoveTodo = useCallback(
+    (id) => {
+      // 이벤트 핸들러는 화살표 함수로 만든다
+      //debugger;
+
+      const newTodos = todoItems.filter((item) => {
+        if (item.id === id) {
+          return false; //제외
+        } else {
+          return true; //포함
+        }
+      });
+      setTodoItems(newTodos); //todoItems = newTodos;
+    },
+    [
+      /* 연관배열: 메서드와 연관되는 상태(변수)명들을 기술 */
+      todoItems,
+      //setTodoItems 입력시 바로위쪽에 있는것 입력시
+      //해당부분 set빼고 대문자소문자로 바꾸고 작성해줘야함
+    ],
+  );
 
   // 이벤트 핸들러 작성.
   const handler = (e) => {
@@ -231,7 +278,10 @@ function TodoContainer({ ...props }) {
                 <div className="modal-footer">
                   <span>
                     할 일을 입력하세요.
-                    <i className="closeModalBtn fas fa-times" aria-hidden="true"></i>
+                    <i
+                      className="closeModalBtn fas fa-times"
+                      aria-hidden="true"
+                    ></i>
                   </span>
                 </div>
               </div>
@@ -240,7 +290,11 @@ function TodoContainer({ ...props }) {
         </div>
 
         {/* <!-- TodoList --> */}
-        <TodoList todoItems={todoItems}></TodoList>
+        <TodoList
+          todoItems={todoItems}
+          callbackDoneToggle={callbackDoneToggle}
+          callbackRemoveTodo={callbackRemoveTodo}
+        ></TodoList>
 
         {/* <!-- TodoHeader --> */}
         <TodoFooter callbackClearAll={callbackClearAll}></TodoFooter>

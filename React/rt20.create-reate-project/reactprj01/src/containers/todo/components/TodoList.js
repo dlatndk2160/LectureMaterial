@@ -61,7 +61,7 @@ const StyledTodoList = styled.div`
   }
 `;
 
-function TodoList({ todoItems }) {
+function TodoList({ todoItems, callbackDoneToggle, callbackRemoveTodo }) {
   // useState 를 사용한 컴포넌트의 상태값 설정
   const [변수명, set변수명] = useState('기본값'); // 상태값이 기본타입인 경우
   const [state, setState] = useState({
@@ -121,24 +121,50 @@ function TodoList({ todoItems }) {
   );
 
   // 이벤트 핸들러 작성.
-  const handler = (e) => {
+  //const handler = (e) => {
+  const handlerDoneToggle = (e) => {
     // 이벤트 핸들러는 화살표 함수로 만든다
     console.log(e.target);
+    //debugger;
+
+    const id = Number(e.target.dataset.id); //data-id
+    const item = JSON.parse(e.target.dataset.item); // data-item
+    e.stopPropagation();
+
+    //부모 콜백 메서드 호출 //부모로부터 받는 메서드
+    callbackDoneToggle(id);
   };
 
-  const lis = todoItems.map((item) => {
-    const checked = item.done ? 'checked' : null;
-    //key={item.id}없으면 에러남
-    return (
-      <li key={item.id} className={checked}>
-        <i aria-hidden="true" className="checkBtn fas fa-check"></i>
-        {item.todo}
-        <span type="button" className="removeBtn">
-          <i aria-hidden="true" className="far fa-trash-alt"></i>
-        </span>
-      </li>
-    );
-  });
+  const handlerRemoveTodo = (id) => {
+    callbackRemoveTodo(id);
+  };
+
+  const lis =
+    todoItems &&
+    todoItems.map((item) => {
+      return (
+        <li
+          key={item.id}
+          className={item.done ? 'checked' : null}
+          data-id={item.id}
+          data-item={JSON.stringify(item)}
+          onClick={handlerDoneToggle}
+        >
+          <i aria-hidden="true" className="checkBtn fas fa-check"></i>
+          {item.todo}
+          <span
+            type="button"
+            className="removeBtn"
+            onClick={(e) => {
+              e.stopPropagation(); //이벤트 취소, 버블링 방지
+              handlerRemoveTodo(item.id);
+            }}
+          >
+            <i aria-hidden="true" className="far fa-trash-alt"></i>
+          </span>
+        </li>
+      );
+    });
 
   // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
   return (
@@ -153,12 +179,18 @@ function TodoList({ todoItems }) {
 TodoList.propTypes = {
   // props의 프로퍼티 타입 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
   // 인자명: PropTypes.func.isRequired,
+  callbackDoneToggle: PropTypes.func.isRequired,
+  callbackRemoveTodo: PropTypes.func.isRequired,
+
   // 인자명: PropTypes.arrayOf(PropTypes.object),
   todoItems: PropTypes.arrayOf(PropTypes.object),
 };
 TodoList.defaultProps = {
   // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
   // 인자명: () => {},
+  callbackDoneToggle: () => {},
+  callbackRemoveTodo: () => {},
+
   // 인자명: [],
   todoItems: [],
 };
