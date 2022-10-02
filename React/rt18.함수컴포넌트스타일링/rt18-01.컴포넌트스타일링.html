@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible"
+      content="ie=edge" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet"
+      href="../css/reset.css" />
     <style>
-        .App {
-            display: inline-block;
-            background-color: gray;
-            border: 10px solid black;
-            height: 63px; /* Math.round(Math.random() * 30) + 50 */
-            width: 228px; /* Math.round(Math.random() * 300) - 50 */
-        }
+      .App {
+        display: inline-block;
+        background-color: gray;
+        border: 10px solid black;
+        height: 63px;
+        /* Math.round(Math.random() * 30) + 50 */
+        width: 228px;
+        /* Math.round(Math.random() * 300) - 50 */
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <xmp>
         컴포넌트 스타일링 기법을 학습한다.
         컴포넌트의 작성 원칙은 수정없이 재사용 가능해야 한다.
@@ -46,20 +51,40 @@
             height: 63px;
             width: 228px;
         }
+
+        만들 React 컴포넌트명 : CompStyle
+        만들 Style 컴포넌트 :StyledDiv, StyledCircle, 단축키:styled
+
+        $ ls
+        $ mkdir -p ./src/containers/styled
+        $ touch ./src/containers/styled/CompStyle.js
+
+        App.js 수정한다.
+        import ComStyle from './src/containers/styled/CompStyle';
+
+        function App(){
+          return(
+            <div>
+              <CompStyle></CompStyle>
+            </div>
+          );
+        }
+
     </xmp>
+
+
     <hr>
 
     <h2>스타일로 만든 </h2>
     <div class="App">
-        스타일로 만든
+      스타일로 만든
     </div>
     <hr>
 
     <h2>styled-components 로 만든 컴포넌트</h2>
     <div id="app">
-        styled-components 로 만든
+      styled-components 로 만든
     </div>
-</body>
+  </body>
 
 </html>
-

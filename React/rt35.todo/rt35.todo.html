@@ -230,6 +230,8 @@
         $ touch src/containers/home/HomeContainer.js
 
     13-6. 라우팅 폴더 및 PageHome 컴포넌트 만들기
+        rfc > save
+
         $ mkdir -p ./src/pages
         $ touch src/pages/PageHome.js
 
@@ -318,6 +320,7 @@
 
     step 21-5. styled-components 를 이용하여 TodoContainer 컴포넌트 스타일링하기
         1차/style.css 파일의 css 코드를 StyledTodoContainer 에 추가한다.
+        body 태그 밑에부터 (body태그는 소용없음)
 
     step 21-6. modal 창 숨기기
         변경 전: <div class="modal-mask">
@@ -410,7 +413,7 @@
           ... 중략
         </StyledTodoFooter>
 
-    step 24-05. TodoFooter 컴포넌트 JSX 의 
+    step 24-05. TodoFooter 컴포넌트 JSX 의
         span.clearAllBtn 에 onclick 이벤트 핸들러 추가
         <div className="clearAllContainer">
             <span className="clearAllBtn" onClick={handlerClearAll}>
@@ -445,27 +448,27 @@
         </TodoFooter>
 
     step 24-11. TodoContainer 컴포넌트에 callbackClearAll 메서드 추가한다
-        주의!!! 
-          useCallback 을 사용하는 경우연관배열을 작성에 주의하시오. 
+        주의!!!
+          useCallback 을 사용하는 경우연관배열을 작성에 주의하시오.
           useCallback 상태값이 변경되면 메서드를 다시 만들고
           자식들에게 변경된 함수(메서드)를 다시 내려준다
-        
+
         const callbackClearAll = useCallback(() => {
             // state 변경
             debugger;
-            
+
             // 직접 코드를 완성하시오.
             // setTodoItems 는  todoItems 상태를 바꾸기 위한 setter 메서드
             // todoItems = [];
-            
+
         }, []);
 
     step 24-11. TodoContainer 상태값 확인
-        F12 를 눌러 개발자 모드로 들어가서 
+        F12 를 눌러 개발자 모드로 들어가서
         components 탭을 누르시오.
         TodoContainer 를 선택하고 컴포넌트의 상태값을 확인한다.
-    
-    
+
+
     ##################################
     step 25. TodoList 컴포넌트 만들고 기능 완성한다.
         소요시간: 10분
@@ -563,24 +566,24 @@
     ##################################
 
     step 26-1. TodoList 의 JSX에
-        li 태그에 DoneToggle onClick 설정한다.  
-    
+        li 태그에 DoneToggle onClick 설정한다.
+
         const handler = (e) => {
             // click 이벤트 취소. 버블링 방지
-            // 
+            //
             const id = Number(e.target.dataset.id);  // data-id
             e.stopPropagation();
 
             handlerDoneToggle(item.id);
         };
-        
+
         const lis = todoItems && todoItems.map((item) => {
         return (
           <li
               key={item.id}
               className={item.done ? 'checked' : null}
-              data-id={item.id} 
-              data-item={JSON.stringify(item)} 
+              data-id={item.id}
+              data-item={JSON.stringify(item)}
               onClick={handler}
               onClick={(e) => {
                 // click 이벤트 취소. 버블링 방지
@@ -658,7 +661,7 @@
                 <i aria-hidden="true" className="far fa-trash-alt"></i>
             </span>
 
-    step 27-02. TodoList 에 handlerRemoveTodo(id) handler 작성 
+    step 27-02. TodoList 에 handlerRemoveTodo(id) handler 작성
         ==> ap03-11.객체배열.html 참조
 
         const handlerRemoveTodo = (id) => {
@@ -736,9 +739,9 @@
 
     step 28-07. TodoInput 컴포넌트 JSX 에 조건부 렌더링 기능 추가
         조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
-        
-        주의사항: style={{ display: 'none' }} 을 삭제하시오. 
-        
+
+        주의사항: style={{ display: 'none' }} 을 삭제하시오.
+
         {isShowModal && (
             <div className="modal-mask">
                 <div className="modal-wrapper">
@@ -760,14 +763,14 @@
                 </div>
             </div>
         )}
-        
+
     step 28-08. <div className="modal-footer"> 에 onclick 이벤트를 추가하시오.
         변경전:
         <div className="modal-footer">
             ... 중략
         </div>
-        
-        
+
+
         변경후:
         <div className="modal-footer" onClick={handlerShowModal}>
             ... 중략
@@ -783,27 +786,27 @@
 
     step 28-10. TodoInput 컴포넌트 JSX 의 input 에 ref 설정하기
         ref 는 Real DOM 에 접근하여 input 태그의 value 속성값을 가져오기 위해서 사용
-            <input value="abc" />            
-        ref 사용법: ref명.current.value 
-        
+            <input value="abc" />
+        ref 사용법: ref명.current.value
+
         변경 전
             <input
                 type="text"
                 placeholder="Type what you have to do"
             />
-        
-        변경 후 : ref={refInputTodo} 추가 
+
+        변경 후 : ref={refInputTodo} 추가
             <input
                 type="text"
                 placeholder="Type what you have to do"
                 ref={refInputTodo}
             />
-            
+
     step 28-11. refInputTodo 만들기
             const refInputTodo = useRef();
 
     step 28-12. TodoInput 컴포넌트 JSX 에 onKeyUp 기능 추가
-        input 태그에서 enter 가 입력되면 
+        input 태그에서 enter 가 입력되면
         <input
             type="text"
             placeholder="Type what you have to do"
@@ -821,7 +824,7 @@
 
     step 28-14. TodoInput 컴포넌트 handlerAddTodo 메서드 작성
         // click 이벤트 취소. 버블링 방지
-        // input 에 입력된 값을 가져오기. 어떻게 해야 하나? ==> ref명.current.value 
+        // input 에 입력된 값을 가져오기. 어떻게 해야 하나? ==> ref명.current.value
         // input 태그에 빈 문자열이 입력 되는 경우는 modal 창이 출력되게
         // TodoContainer 의 callbackAddTodo 메서드 호출 기능 추가
         // add 후에 input 태그의 입력 값 지우기.
@@ -839,20 +842,20 @@
 
 
     ##################################
-    step 31. 검색 기능을 추가한다. 
+    step 31. 검색 기능을 추가한다.
         TodoSearch 컴포넌트 만들고 기능 완성한다.
         소요시간: 30분
     ##################################
-    
-    
+
+
 
 
     ##################################
     step 32. todo 제목을 수정하는 기능을 추가한다.
         소요시간: 30분
     ##################################
-    
-    
+
+
     </xmp>
 
   </body>
