@@ -107,7 +107,7 @@
         $ git status    # 파일의 추가, 변경, 삭제 확인
         $ git add -AN   # 신규 파일 추가
         $ git status    # 파일의 추가, 변경, 삭제 확인
-        $ git commit -a -m '프로젝트 시작하기'      # 파일 commit //에러남
+        $ git commit -a -m '프로젝트 시작하기'      # 파일 commit //메시지 ''있는 것 까지 명령어에 넣어야함
         $ git push      #
 
         github 사이트에서 소스가 올라갔는지 확인한다.
@@ -234,7 +234,7 @@
         $ ls     # build/ 폴더가 보이는지 확인. 없으면 정상
         node_modules/  package.json  package-lock.json  public/  README.md  src/
 
-        $ npm run build
+        $ npm run build //package.json에 있는 build를 실행하겠다는 의미
 
         $ ls    # build/ 폴더가 보이는지 확인. 있으면 정상
         build/  node_modules/  package.json  package-lock.json  public/  README.md  src/
@@ -244,7 +244,7 @@
 
 
     ##################################
-    3. 프로젝트 환경 설정
+    4. 프로젝트 환경 설정
        소요시간: 15분
     ##################################
 
@@ -289,12 +289,12 @@
 
         # .babelrc 파일을 프로젝트 루트에 만들기
         $ pwd     # 현재 작업하는 폴더 위치 확인
-        $ ls -a   # package.json 파일이 보이는지 확인
-        $ touch .babelrc
-        $ echo -e "{\n}" > .babelrc
+        $ ls -a   # package.json 파일이 보이는지 확인 //hidden파일을 볼 수 있음
+        $ touch .babelrc  //touch를 이용하면 파일을 만들 수 있음
+        $ echo -e "{\n}" > .babelrc //{}을 넣어라
         $ cat .babelrc
 
-        # .babelrc 파일을 열고 아래 내용을 추가한다.
+        # .babelrc 파일을 열고 아래 내용을 추가한다. //{}는 입력되어있음
         {
             "presets": [
                 ["react-app"],
@@ -331,6 +331,13 @@
         $ ls -a   # package.json 파일이 보이는지 확인
         $ touch .env
         $ echo -e "SKIP_PREFLIGHT_CHECK=true \nPORT=15109" > .env
+          //
+          SKIP_PREFLIGHT_CHECK=true
+          PORT=15109
+          내용 들어가짐
+          //
+
+
         $ cat .env
 
         # .env  파일에 아래 내용 추가
@@ -366,7 +373,7 @@
         # .prettierrc.js 파일을 프로젝트 루트에 만들기
         $ pwd     # 현재 작업하는 폴더 위치 확인
         $ ls -a   # package.json 파일이 보이는지 확인
-        $ touch .prettierrc.js
+        $ touch .prettierrc.js  //파일생성
         $ echo -e "module.exports = {\n}" > .prettierrc.js
         $ cat .prettierrc.js
 
@@ -414,6 +421,7 @@
             * npm install 을 사용하는 설정 방식(추천)
 
         # 방법1. npm init 을 사용하는 설정 방식(비추천)
+        //만들어도 안의 설정을 다시 해줘야하기 때문에 비추천
         $ npm init @eslint/config  # .eslintrc.js 파일을 생성.
             ? How would you like to use ESLint? ...
                 To check syntax only
@@ -465,6 +473,11 @@
 
         # .eslintrc.js 파일 생성 후 내용 추가
         $ echo -e "module.exports = {\n}" > .eslintrc.js
+        //
+        module.exports = {
+        }
+        만들어줌
+        //
 
 
 
