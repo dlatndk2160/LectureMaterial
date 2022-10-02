@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible"
+      content="ie=edge" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="../css/reset.css" />
-</head>
+    <link rel="stylesheet"
+      href="../css/reset.css" />
+  </head>
 
-<body>
+  <body>
     <xmp>
         JSX 에서 반복문을 사용하는 방법을 배운다.
 
@@ -35,8 +38,73 @@
     <div id="wrap2"></div>
     <div id="wrap3"></div>
     <div id="wrap4"></div>
-</body>
+  </body>
 
 </html>
 
+<script src="https://unpkg.com/@babel/standalone/babel.js"
+  crossorigin="anonymous">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+  </script>
+<script src="http://unpkg.com/react@17/umd/react.development.js"
+  crossorigin="anonymous">
+    /* import React, { Component, PureComponent } from 'react' */
+  </script>
+<script src="http://unpkg.com/react-dom@17/umd/react-dom.development.js"
+  crossorigin="anonymous">
+    /* import ReactDOM from 'react-dom' */
+  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.js"
+  crossorigin="anonymous">
+  </script>
+<script src="http://unpkg.com/react-is@17/umd/react-is.development.js"
+  crossorigin="anonymous">
+  </script>
+<script src="http://unpkg.com/styled-components@5/dist/styled-components.js"
+  crossorigin="anonymous">
+    /*  import styled, { css } from 'styled-components' */
+  </script>
+<script type="text/babel">
 
+  const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
+
+  ReactDOM.render(
+    <Loop3></Loop3>, document.getElementById('wrap3')
+  )
+
+  function Loop3({
+    ...props
+  }) {
+    // useState 를 사용한 컴포넌트의 상태값 설정
+    const [elements, setElements] = useState(['one', 'two', 'three']); // 상태값이 기본타입인 경우
+
+    // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
+
+    //객체배열
+    //const lis = elements.map((item, index, array) => {
+    //단순배열
+    const lis = elements.map((item, index) => {
+      //debugger;
+      return (<li key={index}>{item}</li>); //이건 변수명 (map 뒤에 선언해준 변수명을 써야함)
+      //return (<li>item</li>); //이건 문자열
+    })
+    //elements에있는걸 이용해서 새로운 인자?를 만들겠다.
+
+    return (
+      <div>
+        <ul>
+          {lis}
+        </ul>
+      </div>
+    )
+    /*
+    //아래처럼 써도 됨 {lis}대신
+    {
+      elements.map((item) => {
+      return (<li>{item}</li>); //이건 변수명 (map 뒤에 선언해준 변수명을 써야함)
+    }
+    })
+    */
+  }
+
+</script>

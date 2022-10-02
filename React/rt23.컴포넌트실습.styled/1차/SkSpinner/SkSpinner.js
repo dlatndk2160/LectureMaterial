@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { getPublicAsset } from '@/utils';
 
 export function SkSpinner({ type, children, ...restProps }) {
-  
   const isGrowType = type.includes('grow');
   const glowStyles = {
     width: isGrowType && 'auto',
@@ -15,9 +14,7 @@ export function SkSpinner({ type, children, ...restProps }) {
   useEffect(() => {
     const loadingStartNode = document.getElementById('loading-start');
     loadingStartNode.setAttribute('role', 'alert');
-    loadingStartNode.innerHTML = `<span class="a11yHidden">${
-      children ?? '로딩이 시작되었습니다.'
-    }</span>`;
+    loadingStartNode.innerHTML = `<span class="a11yHidden">${children ?? '로딩이 시작되었습니다.'}</span>`;
 
     return () => {
       loadingStartNode.removeAttribute('role');
@@ -34,12 +31,7 @@ export function SkSpinner({ type, children, ...restProps }) {
 
   return (
     <figure className={styles.container} {...restProps}>
-      <img
-        className={styles.image}
-        style={glowStyles}
-        src={imagePath}
-        alt="서버로부터 데이터를 로딩 중입니다."
-      />
+      <img className={styles.image} style={glowStyles} src={imagePath} alt="서버로부터 데이터를 로딩 중입니다." />
     </figure>
   );
 }
